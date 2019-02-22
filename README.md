@@ -3,4 +3,9 @@ Super-Cool Group
 Members: Rungur Bootseeta,
          Julio Sarda Perez,
          Sean Thompson,
-         Robert Thompson,
+         Robert Thompson
+         
+Team Leader: Robert Thompson
+
+Workflow: Feature Branch Workflow
+
