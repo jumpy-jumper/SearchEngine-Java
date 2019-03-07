@@ -55,6 +55,8 @@ public class action2 implements ActionListener {
 		JButton b1 = new JButton("Adding"); 
 		b1.setBounds(60, 50, 100, 20);
 		window.getContentPane().add(b1);
+		//b3.addActionListener(new action2());
+		b1.addActionListener(new adding());
 		
 		JButton b2 = new JButton("Removing"); 
 		b2.setBounds(60, 80, 100, 20);
@@ -65,10 +67,9 @@ public class action2 implements ActionListener {
 		window.getContentPane().add(b3);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(283, 10, 301, 329);
+		scrollPane.setBounds(283, 10, 301, 337);
 		window.getContentPane().add(scrollPane);
-		
-		
+			
 		table_1 = new JTable();
 		table_1.setColumnSelectionAllowed(true);
 		table_1.setFillsViewportHeight(true);
@@ -99,11 +100,7 @@ public class action2 implements ActionListener {
 		
 		
 		
-		
-		//JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-		
-		
-		
+
 		
 	}
 }
