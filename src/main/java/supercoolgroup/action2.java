@@ -16,6 +16,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -24,9 +25,12 @@ import javax.swing.border.TitledBorder;
 import java.awt.SystemColor;
 import java.awt.ScrollPane;
 import java.awt.Panel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class action2 implements ActionListener {
 	private JTable table;
+
 
 
 	/**
@@ -56,18 +60,19 @@ public class action2 implements ActionListener {
 		indexed.setForeground(Color.BLACK);
 		window.getContentPane().add(indexed);
 
-		JButton b1 = new JButton("Adding"); 
+		JButton b1 = new JButton("Add"); 
 		b1.setBounds(60, 50, 100, 20);
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				 SwingUtilities.invokeLater( new Runnable(){
 				 public void run () {
 					 JFileChooser fileChooser = new JFileChooser( "." );         
 					 int status = fileChooser.showOpenDialog( null );         
 					 if ( status == JFileChooser.APPROVE_OPTION ){ 
-						 File selectedFile = fileChooser.getSelectedFile(); 
-						 System.out.println( "Selected: "+ selectedFile.getParent()+ " --- "+ selectedFile.getName() );   
+						 File selectedFile = fileChooser.getSelectedFile();
+						 //System.out.println( "Selected: "+ selectedFile.getParent()+ " --- "+ selectedFile.getName() );   
+						 DefaultTableModel model = (DefaultTableModel)table.getModel();
+						 model.addRow(new Object [] {selectedFile.getParentFile(), "File Selected"});
 						 }            
 					 }     
 				 }); 
@@ -75,24 +80,41 @@ public class action2 implements ActionListener {
 		});
 		window.getContentPane().add(b1);
 		
-		JButton b2 = new JButton("Removing"); 
+		JButton b2 = new JButton("Remove"); 
+		b2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DefaultTableModel model = (DefaultTableModel)table.getModel();
+				
+				try {
+					int selectedRowIndex = table.getSelectedRow();
+					model.removeRow(selectedRowIndex);
+				}catch(Exception ex)
+				{
+					JOptionPane.showMessageDialog(null, ex);
+				}
+				
+			}
+		});
 		b2.setBounds(60, 80, 100, 20);
 		window.getContentPane().add(b2);
 		
-		JButton b3 = new JButton("Updating"); 
+		JButton b3 = new JButton("Update"); 
 		b3.setBounds(60, 110, 100, 20);
 		window.getContentPane().add(b3);
 		
-		// Test table
-		Object[][] data = {{"sdf","asdasd","asd"}};
-		String [] title = {"File name", "Status", "Size"};
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(271, 11, 301, 322);
+		window.getContentPane().add(scrollPane);
 		
-		JTable table = new JTable(data, title);
-		
-		JScrollPane scrollpane= new JScrollPane(table);
-		scrollpane.setBounds(267, 22, 303, 326);
-		window.getContentPane().add(scrollpane);
-		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"File name", "Status"
+			}
+		));
+		scrollPane.setViewportView(table);
 		
 		
 	}
