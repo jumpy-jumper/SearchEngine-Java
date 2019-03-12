@@ -83,7 +83,7 @@ public Gui() {
 	
 	//About Button
 	b2 = new JButton("About us");
-	b2.setBounds(20, 250, 100, 20);
+	b2.setBounds(20, 235, 100, 20);
 	add(b2);
 	b2.addActionListener(new Action());
 	
@@ -109,7 +109,7 @@ public Gui() {
 	bg1 = new ButtonGroup();
 	bg1.add(rb1);
 	bg1.add(rb2);
-	bg1.add(rb3);		
+	bg1.add(rb3);
 }
 	
 }

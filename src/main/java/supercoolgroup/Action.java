@@ -33,7 +33,7 @@ public class Action implements ActionListener {
 		name2.setForeground(Color.BLACK);
 		about.add(name2);
 		
-		JLabel name3 = new JLabel("Wirrte By Super-Cool Group, Tampa FL, USA");
+		JLabel name3 = new JLabel("Written By Super-Cool Group, Tampa FL, USA");
 		name3.setOpaque(true);
 		name3.setFont(new Font("Serif", Font.PLAIN, 13));
 		name3.setBounds(50, 60, 300, 100);
