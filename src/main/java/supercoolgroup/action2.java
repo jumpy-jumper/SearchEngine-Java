@@ -30,6 +30,7 @@ import java.awt.event.MouseEvent;
 
 public class action2 implements ActionListener {
 	private JTable table;
+	private File currentFile;
 
 
 
@@ -73,6 +74,7 @@ public class action2 implements ActionListener {
 						 //System.out.println( "Selected: "+ selectedFile.getParent()+ " --- "+ selectedFile.getName() );   
 						 DefaultTableModel model = (DefaultTableModel)table.getModel();
 						 model.addRow(new Object [] {selectedFile.getParentFile(), "File Selected"});
+						 currentFile = selectedFile;
 						 }            
 					 }     
 				 }); 
@@ -101,6 +103,11 @@ public class action2 implements ActionListener {
 		JButton b3 = new JButton("Update"); 
 		b3.setBounds(60, 110, 100, 20);
 		window.getContentPane().add(b3);
+
+		JButton b4 = new JButton("Query");
+		b4.setBounds(60, 140, 100, 20);
+		window.getContentPane().add(b4);
+		b4.addActionListener(new ActionQuery(currentFile));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(271, 11, 301, 322);
