@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 public class Action implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		JFrame about = new JFrame();
 		about.setTitle("About us");
 		about.setVisible(true);
