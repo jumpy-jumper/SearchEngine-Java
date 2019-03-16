@@ -1,24 +1,14 @@
 package supercoolgroup;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JRadioButton;
-import java.awt.*;
-import java.awt.event.*;
 
 public class Gui extends JFrame{
 	
@@ -85,13 +75,13 @@ public Gui() {
 	b2 = new JButton("About us");
 	b2.setBounds(20, 235, 100, 20);
 	add(b2);
-	b2.addActionListener(new Action());
+	b2.addActionListener(new ActionAbout());
 	
 	// Maintenance Button
 	b3 = new JButton("Maintenance");
 	b3.setBounds(470, 120, 130, 30);
 	add(b3);
-	b3.addActionListener(new action2());
+	b3.addActionListener(new ActionMaintenance());
 	
 	rb1 = new JRadioButton("All of the search terms", true);
 	rb1.setBounds(610, 62, 200, 20);

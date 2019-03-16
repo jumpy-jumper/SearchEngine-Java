@@ -1,39 +1,21 @@
 package supercoolgroup;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
-import javax.swing.filechooser.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.JTable;
-import javax.swing.border.TitledBorder;
-import java.awt.SystemColor;
-import java.awt.ScrollPane;
-import java.awt.Panel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 // Querying action.
 public class ActionQuery implements ActionListener {
 
-	action2 maintWindow; // a reference to the maint window this instance is spawned from.
+	ActionMaintenance maintWindow; // a reference to the maint window this instance is spawned from.
 
-	ActionQuery (action2 maintWindow)
+	ActionQuery (ActionMaintenance maintWindow)
 	{
 		this.maintWindow = maintWindow;
 	}

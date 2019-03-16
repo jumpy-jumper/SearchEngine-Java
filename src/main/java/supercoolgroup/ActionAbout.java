@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class Action implements ActionListener {
+public class ActionAbout implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		JFrame about = new JFrame();

@@ -28,7 +28,7 @@ import java.awt.Panel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class action2 implements ActionListener {
+public class ActionMaintenance implements ActionListener {
 	private JTable table;
 	File currentFile;
 
