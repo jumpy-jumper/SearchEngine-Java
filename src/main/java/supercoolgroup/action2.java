@@ -30,14 +30,12 @@ import java.awt.event.MouseEvent;
 
 public class action2 implements ActionListener {
 	private JTable table;
-
-
+	File currentFile;
 
 	/**
 	 * @wbp.parser.entryPoint
 	 */
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		JFrame window = new JFrame();
 		window.setTitle("Maintenance");
 		window.setVisible(true);
@@ -69,10 +67,10 @@ public class action2 implements ActionListener {
 					 JFileChooser fileChooser = new JFileChooser( "." );         
 					 int status = fileChooser.showOpenDialog( null );         
 					 if ( status == JFileChooser.APPROVE_OPTION ){ 
-						 File selectedFile = fileChooser.getSelectedFile();
+						 currentFile = fileChooser.getSelectedFile();
 						 //System.out.println( "Selected: "+ selectedFile.getParent()+ " --- "+ selectedFile.getName() );   
 						 DefaultTableModel model = (DefaultTableModel)table.getModel();
-						 model.addRow(new Object [] {selectedFile.getParentFile(), "File Selected"});
+						 model.addRow(new Object [] {currentFile.getParentFile(), "File Selected"});
 						 }            
 					 }     
 				 }); 
@@ -101,6 +99,11 @@ public class action2 implements ActionListener {
 		JButton b3 = new JButton("Update"); 
 		b3.setBounds(60, 110, 100, 20);
 		window.getContentPane().add(b3);
+
+		JButton b4 = new JButton("Query");
+		b4.setBounds(60, 140, 100, 20);
+		window.getContentPane().add(b4);
+		b4.addActionListener(new ActionQuery(this));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(271, 11, 301, 322);

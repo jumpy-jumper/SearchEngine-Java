@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 public class Action implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		JFrame about = new JFrame();
 		about.setTitle("About us");
 		about.setVisible(true);
@@ -33,7 +32,7 @@ public class Action implements ActionListener {
 		name2.setForeground(Color.BLACK);
 		about.add(name2);
 		
-		JLabel name3 = new JLabel("Wirrte By Super-Cool Group, Tampa FL, USA");
+		JLabel name3 = new JLabel("Written By Super-Cool Group, Tampa FL, USA");
 		name3.setOpaque(true);
 		name3.setFont(new Font("Serif", Font.PLAIN, 13));
 		name3.setBounds(50, 60, 300, 100);
