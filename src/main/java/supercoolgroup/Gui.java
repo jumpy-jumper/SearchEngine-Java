@@ -63,7 +63,7 @@ public class Gui extends JFrame{
 	add(la2);
 	
 	//Third Label
-	la3 = new JLabel("Files indexed : 0");
+	la3 = new JLabel("Files indexed : ");
 	la3.setOpaque(true);
 	la3.setFont(new Font("Serif", Font.BOLD, 13));
 	la3.setBounds(335, 125, 100, 30);

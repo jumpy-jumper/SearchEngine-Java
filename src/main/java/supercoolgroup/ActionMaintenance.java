@@ -32,6 +32,7 @@ public class ActionMaintenance implements ActionListener {
 	private JTable table;
 	File currentFile;
 	Gui parentGui; // a reference to the parent GUI
+	int count;
 
 	ActionMaintenance(Gui gui)
     {
@@ -41,7 +42,7 @@ public class ActionMaintenance implements ActionListener {
 	 * @wbp.parser.entryPoint
 	 */
 	public void actionPerformed(ActionEvent arg0) {
-		JFrame window = new JFrame();
+		final JFrame window = new JFrame();
 		window.setTitle("Maintenance");
 		window.setVisible(true);
 		window.getContentPane().setLayout(null);
@@ -56,7 +57,7 @@ public class ActionMaintenance implements ActionListener {
 		name.setForeground(Color.BLACK);
 		window.getContentPane().add(name);
 		
-		JLabel indexed = new JLabel("Number of files indexed : 0");
+	    final JLabel indexed = new JLabel("Number of files indexed : " + count);
 		indexed.setOpaque(true);
 		indexed.setFont(new Font("Serif", Font.BOLD, 14));
 		indexed.setBounds(50, 180, 200, 20);
@@ -77,6 +78,8 @@ public class ActionMaintenance implements ActionListener {
                              DefaultTableModel model = (DefaultTableModel) table.getModel();
                              model.addRow(new Object[]{currentFile.getParentFile(), "File Selected"});
                              parentGui.model = model;
+                             count++;
+      
                          }
                      }
                  });
@@ -93,18 +96,29 @@ public class ActionMaintenance implements ActionListener {
 					int selectedRowIndex = table.getSelectedRow();
 					model.removeRow(selectedRowIndex);
                     parentGui.model = model;
+                    count--;
 				}catch(Exception ex)
 				{
 					JOptionPane.showMessageDialog(null, ex);
 				}
-				
 			}
+		  
 		});
 		b2.setBounds(60, 80, 100, 20);
 		window.getContentPane().add(b2);
 		
 		JButton b3 = new JButton("Update"); 
 		b3.setBounds(60, 110, 100, 20);
+		b3.addActionListener(new ActionListener(){
+			public void actionPerformed (ActionEvent arg0) {
+				SwingUtilities.invokeLater( new Runnable() {
+					public void run() {
+						indexed.setText("Number of files indexed : " + count);
+					}
+				});
+			}
+		
+		});
 		window.getContentPane().add(b3);
 
 		JButton b4 = new JButton("Query");
@@ -132,6 +146,5 @@ public class ActionMaintenance implements ActionListener {
         }
 
 		scrollPane.setViewportView(table);
-		
 	}
 }
