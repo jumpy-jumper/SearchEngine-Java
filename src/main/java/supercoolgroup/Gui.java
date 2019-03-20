@@ -9,6 +9,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
+import javax.swing.table.DefaultTableModel;
 
 public class Gui extends JFrame{
 	
@@ -18,15 +19,18 @@ public class Gui extends JFrame{
 	JButton b1,b2,b3;
 	JRadioButton rb1, rb2, rb3;
 	ButtonGroup bg1;
-	
+
+    DefaultTableModel model = null; // empty table
+
 	public static void main(String[] args) {
-		
+
 		Gui frame = new Gui();
 		frame.setVisible(true);
 
 				
 	}
-public Gui() {
+
+    public Gui() {
 	
 	// Window
 	setLayout(null);
@@ -76,12 +80,12 @@ public Gui() {
 	b2.setBounds(20, 235, 100, 20);
 	add(b2);
 	b2.addActionListener(new ActionAbout());
-	
+
 	// Maintenance Button
 	b3 = new JButton("Maintenance");
 	b3.setBounds(470, 120, 130, 30);
 	add(b3);
-	b3.addActionListener(new ActionMaintenance());
+	b3.addActionListener(new ActionMaintenance(this));
 	
 	rb1 = new JRadioButton("All of the search terms", true);
 	rb1.setBounds(610, 62, 200, 20);

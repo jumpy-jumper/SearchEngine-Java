@@ -31,7 +31,12 @@ import java.awt.event.MouseEvent;
 public class ActionMaintenance implements ActionListener {
 	private JTable table;
 	File currentFile;
+	Gui parentGui; // a reference to the parent GUI
 
+	ActionMaintenance(Gui gui)
+    {
+        parentGui = gui;
+    }
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -62,18 +67,19 @@ public class ActionMaintenance implements ActionListener {
 		b1.setBounds(60, 50, 100, 20);
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 SwingUtilities.invokeLater( new Runnable(){
-				 public void run () {
-					 JFileChooser fileChooser = new JFileChooser( "." );         
-					 int status = fileChooser.showOpenDialog( null );         
-					 if ( status == JFileChooser.APPROVE_OPTION ){ 
-						 currentFile = fileChooser.getSelectedFile();
-						 //System.out.println( "Selected: "+ selectedFile.getParent()+ " --- "+ selectedFile.getName() );   
-						 DefaultTableModel model = (DefaultTableModel)table.getModel();
-						 model.addRow(new Object [] {currentFile.getParentFile(), "File Selected"});
-						 }            
-					 }     
-				 }); 
+				 SwingUtilities.invokeLater( new Runnable() {
+                     public void run() {
+                         JFileChooser fileChooser = new JFileChooser(".");
+                         int status = fileChooser.showOpenDialog(null);
+                         if (status == JFileChooser.APPROVE_OPTION) {
+                             currentFile = fileChooser.getSelectedFile();
+                             //System.out.println( "Selected: "+ selectedFile.getParent()+ " --- "+ selectedFile.getName() );
+                             DefaultTableModel model = (DefaultTableModel) table.getModel();
+                             model.addRow(new Object[]{currentFile.getParentFile(), "File Selected"});
+                             parentGui.model = model;
+                         }
+                     }
+                 });
 			}
 		});
 		window.getContentPane().add(b1);
@@ -86,6 +92,7 @@ public class ActionMaintenance implements ActionListener {
 				try {
 					int selectedRowIndex = table.getSelectedRow();
 					model.removeRow(selectedRowIndex);
+                    parentGui.model = model;
 				}catch(Exception ex)
 				{
 					JOptionPane.showMessageDialog(null, ex);
@@ -110,15 +117,21 @@ public class ActionMaintenance implements ActionListener {
 		window.getContentPane().add(scrollPane);
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"File name", "Status"
-			}
-		));
+		if (parentGui.model != null)
+        {
+		    table.setModel(parentGui.model);
+        }
+        else
+        {
+            table.setModel(new DefaultTableModel(
+            new Object[][]{
+            }, new String[]{
+            "File name","Status"
+            }
+            ));
+        }
+
 		scrollPane.setViewportView(table);
-		
 		
 	}
 }
