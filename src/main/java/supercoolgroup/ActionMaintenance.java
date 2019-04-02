@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.filechooser.*;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +34,8 @@ public class ActionMaintenance implements ActionListener {
 	File currentFile;
 	Gui parentGui; // a reference to the parent GUI
 	int count;
+	final int FILE_LIMIT = 50;
+	String[] fileList = new String[FILE_LIMIT];
 
 	ActionMaintenance(Gui gui)
     {
@@ -77,8 +80,15 @@ public class ActionMaintenance implements ActionListener {
                              //System.out.println( "Selected: "+ selectedFile.getParent()+ " --- "+ selectedFile.getName() );
                              DefaultTableModel model = (DefaultTableModel) table.getModel();
                              model.addRow(new Object[]{currentFile.getParentFile(), "File Selected"});
-                             parentGui.model = model;
-                             count++;
+                             parentGui.model = model;                            
+                             fileList[count] = currentFile.getName(); 
+                             count++;                           
+                             try {
+								Save.saveFileList(fileList, count);
+							 } 
+                             catch (IOException e) {
+								e.printStackTrace();
+							 }
       
                          }
                      }
