@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.RowFilter;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.ButtonGroup;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
@@ -21,17 +23,19 @@ import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Gui extends JFrame{
 	
 	JLabel la1, la2, la4;
 	JTextField t1, t2;
 	JCheckBox ch1;
-	JButton b1,b2,b3;
+	JButton b2,b3;
 	JRadioButton rb1, rb2, rb3;
 	ButtonGroup bg1;
 
-    DefaultTableModel model = null; // empty table
+    DefaultTableModel model = null, dm; // empty table
     private JTable table;
 
 	public static void main(String[] args) {
@@ -63,6 +67,18 @@ public class Gui extends JFrame{
 	
 	// First TextBox 
 	t1 = new JTextField("");
+	t1.addKeyListener(new KeyAdapter() {
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			DefaultTableModel table2 = (DefaultTableModel)table.getModel();
+			String search = t1.getText();
+			TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table2);
+			table.setRowSorter(tr);
+			tr.setRowFilter(RowFilter.regexFilter(search));
+			
+			
+		}
+	});
 	t1.setBounds(200, 70, 400, 20);
 	getContentPane().add(t1);
 	
@@ -74,11 +90,6 @@ public class Gui extends JFrame{
 	la2.setForeground(Color.BLACK);
 	getContentPane().add(la2);
 	
-	// Search Button
-	b1 = new JButton("Search");
-	b1.setBounds(200, 120, 100, 30);
-	getContentPane().add(b1);
-	
 	//About Button
 	b2 = new JButton("About us");
 	b2.setBounds(10, 327, 100, 20);
@@ -87,7 +98,7 @@ public class Gui extends JFrame{
 
 	// Maintenance Button
 	b3 = new JButton("Maintenance");
-	b3.setBounds(470, 120, 130, 30);
+	b3.setBounds(424, 120, 130, 30);
 	getContentPane().add(b3);
 	b3.addActionListener(new ActionMaintenance(this));
 	
@@ -134,7 +145,7 @@ public class Gui extends JFrame{
 			
 		}
 	});
-	btnImportData.setBounds(336, 120, 100, 30);
+	btnImportData.setBounds(250, 120, 100, 30);
 	getContentPane().add(btnImportData);
 	
 	JScrollPane scrollPane = new JScrollPane();
