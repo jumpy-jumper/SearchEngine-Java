@@ -1,1 +1,2 @@
 {"fileName":"README.md"}
+{"fileName":".project"}
